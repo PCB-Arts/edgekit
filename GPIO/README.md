@@ -2,7 +2,7 @@
 
 EdgeKit has 3 internal GPIO chips. 
 1x Jetson own GPIO chip
-2x Portexpander via i2c
+1-2x Portexpander via i2c (1x on the Mainboard, 1x on the Industrial board (if choosen))  
 
 With `cat /sys/kernel/debug/gpio` the GPIOs can be displayed. The output returns the number of the GPIO pins and the current status
 
