@@ -1,9 +1,9 @@
 ### General
-Es muss der GPIO13 oder innerhalb des Jetsons pin 38 auf high gezogen werden, um die UART Kommunikation vom 40 Pin Header (/dev/ttyTHS1) auf den internen zu legen
+GPIO13 or within the Jetson pin 38 must be pulled high to put the UART communication from the 40 pin header (/dev/ttyTHS1) to the internal one
 
 
 ### Features
 
-- Slew lmt macht die Flanken langsamer (EMV), Pin15 auf dem Port Expander. Wenn PIN15 High, dann ist enabled, dann 250kbit/s (betrifft alle MODI)
-- Terminierung 120 Ohm am Empfänger, wenn der Termination Pin auf HIGH Ist wird terminiert (RS422/485)
-- Funktioniert nur mit Flow Control 
+- Slew lmt makes edges slower (EMC), pin15 on port expander. If PIN15 is high, then enabled, then 250kbit/s (affects all MODI).
+- Termination 120 Ohm on receiver, if termination pin is HIGH it will terminate (RS422/485)
+- Works only with Flow Control 
