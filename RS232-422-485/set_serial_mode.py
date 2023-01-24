@@ -11,6 +11,7 @@ from gpio import *
 
 MODULE = "Nano"
 # MODULE = "NX"
+UART_BUS = ""
 
 if MODULE == "Nano":
 	SERIAL_OUTPUT_SELCTOR = "38"
@@ -18,12 +19,14 @@ if MODULE == "Nano":
 	SERIAL_SLEW_LIMIT = "495"
 	SERIAL_MODE_1 = "493"
 	SERIAL_MODE_0 = "494"
+	UART_BUS = "ttyTHS1"
 elif MODULE == "NX":
 	SERIAL_OUTPUT_SELCTOR = "393"
 	SERIAL_120_TERMINATION = "228"
 	SERIAL_SLEW_LIMIT = "231"
 	SERIAL_MODE_1 = "229"
 	SERIAL_MODE_0 = "230"
+	UART_BUS = "ttyTHS0"
 else:
 	raise NotImplementedError("Unknown Module: %s", MODULE)
 
@@ -56,28 +59,28 @@ if __name__ == "__main__":
 
 	if mode in ("1", "RS232"):
 		print("Setting mode to RS232")
-		os.popen("stty -F /dev/ttyTHS1 crtscts").read()
+		os.popen(f"stty -F {UART_BUS} crtscts").read()
 		export_pins()
 		set_high(SERIAL_OUTPUT_SELCTOR)  # Switch serial output from 40pin header to D-Sub
 		set_high(SERIAL_MODE_0)
 		set_low(SERIAL_MODE_1)
 	elif mode in ("2", "RS485"):
 		print("Setting mode to RS485")
-		os.popen("stty -F /dev/ttyTHS1 -crtscts").read()
+		os.popen(f"stty -F {UART_BUS} -crtscts").read()
 		export_pins()
 		set_high(SERIAL_OUTPUT_SELCTOR)  # Switch serial output from 40pin header to D-Sub
 		set_low(SERIAL_MODE_0)
 		set_high(SERIAL_MODE_1)
 	elif mode in ("3", "RS422"):
 		print("Setting mode to RS422")
-		os.popen("stty -F /dev/ttyTHS1 -crtscts").read()
+		os.popen(f"stty -F {UART_BUS} -crtscts").read()
 		export_pins()
 		set_high(SERIAL_OUTPUT_SELCTOR)  # Switch serial output from 40pin header to D-Sub
 		set_high(SERIAL_MODE_0)
 		set_high(SERIAL_MODE_1)
 	elif mode in ("4", "loopback"):
 		print("Setting mode to loopback")
-		os.popen("stty -F /dev/ttyTHS1 -crtscts").read()
+		os.popen(f"stty -F {UART_BUS} -crtscts").read()
 		export_pins()
 		set_high(SERIAL_OUTPUT_SELCTOR)  # Switch serial output from 40pin header to D-Sub
 		set_low(SERIAL_MODE_0)
