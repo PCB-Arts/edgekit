@@ -1,37 +1,26 @@
 #!/usr/bin/env python3
+"""
+This is a demo script to set the output of gpio pins.
+Make sure the package gpiod is installed (`apt install -y gpiod`).
+"""
 
-from gpio import *
-
-
-MODULE = "Nano"
-# MODULE = "NX"
-
-if MODULE == "Nano":
-	DO00 = "487"  # Relais 1
-	DO01 = "486"  # Relais 2
-	DO10 = "485"
-	DO11 = "484"
-	DO12 = "483"
-	DO13 = "481"
-elif MODULE == "NX":
-	DO00 = "223"  # Relais 1
-	DO01 = "224"  # Relais 2
-	DO10 = "221"
-	DO11 = "220"
-	DO12 = "219"
-	DO13 = "217"
-else:
-	raise NotImplementedError("Unknown Module: %s", MODULE)
+import os
+import time
 
 
-try:
-	export(DO00)
-	set_output(DO00)
-	for _ in range(3):
-		set_high(DO00)
-		time.sleep(1)
-		set_low(DO00)
-		time.sleep(1)
-except:
-	pass
-unexport(DO00)
+# choose the name of the GPIO PIN - use `gpioinfo` to get a list of gpio pins
+GPIO_NAME = "GPIO_P0.1"
+
+
+# get the lane the GPIO is connected to
+gpio_lane = os.popen(f'gpiofind "{GPIO_NAME}"').read().strip()
+
+for _ in range(5):
+	# set the gpio_lane to high
+	os.popen(f"gpioset {gpio_lane}=1").read().strip()
+	print(f"{GPIO_NAME} set to high")
+	time.sleep(1)
+	# set the gpio_lane to low
+	os.popen(f"gpioset {gpio_lane}=0").read().strip()
+	print(f"{GPIO_NAME} set to low")
+	time.sleep(1)

@@ -1,39 +1,43 @@
-### General 
+# General 
 
 EdgeKit has 3 internal GPIO chips. 
 1x Jetson own GPIO chip
 1-2x Portexpander via i2c (1x on the Mainboard, 1x on the Industrial board (if choosen))  
 
-With `cat /sys/kernel/debug/gpio` the GPIOs can be displayed. The output returns the number of the GPIO pins and the current status
+Install `gpiod` to have an easy access to the gpio pins (`sudo apt install -y gpiod`).
+With `gpioinfo` the GPIOs can be displayed. The output returns the list of the GPIO pins and the current status
 
-### Configure GPIO as input or output: 
 
-To configure a GPIO you have to create it first. Then you have to decide the direction. So either as input or output. First we switch on the GPIO 487.
+## Get the gpio based on its name
 
-`echo 487 > /sys/class/gpio/export`
-If the GPIO should be configured as input, then the following command applies.
+With `gpiofind` you can get the chip and lane of a gpio pin:
+```bash
+$ gpiofind "GPIO_P0.6 - User Button"
+gpiochip3 9
+```
 
-`echo in > /sys/class/gpio/gpio487/direction`
-If the GPIO should be configured as output, then the following command is valid.
 
-`echo out > /sys/class/gpio/gpio487/direction`
-A GPIO configured as output should be given a state, i.e. "high" or "low".
+## Read the state of a gpio pin
 
-### Set state of a GPIO output
-Basically you can only set outputs. To set the state of a GPIO output to "high" the following command is sufficient.
+With `gpioget` you can read the state of a pin (high/low):
+```bash
+$ gpioget gpiochip3 9
+0
+```
 
-`echo 1 > /sys/class/gpio/gpio487/value`
-To set the state of a GPIO output to "low" the following command is sufficient.
 
-`echo 0 > /sys/class/gpio/gpio487/value`
+## Set state of a GPIO output
 
-### Get GPIO state
-To determine the state, i.e. "high" or "low", at a GPIO, the following command is sufficient. The GPIO can be an input as well as an output.
-
-`cat /sys/class/gpio/gpio487/value`
-The output is "1" for "high" or "0" for "low".
-
-### Disable GPIO
-If you don't need GPIOs anymore, you should disable them. By the following commands the files and directories of the GPIOs disappear again. At a reboot the GPIOs will be reset automatically.
-
-`echo gpio487 > /sys/class/gpio/unexport`
+With `gpioset` you can set the state of a pin (high/low):
+```bash
+$ gpiofind "GPIO_P0.5"
+gpiochip3 5
+$ gpioget gpiochip3 5
+0
+$ gpioset gpiochip3 5=1
+$ gpioget gpiochip3 5
+1
+$ gpioset gpiochip3 5=0
+$ gpioget gpiochip3 5
+0
+```
