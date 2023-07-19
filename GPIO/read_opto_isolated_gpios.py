@@ -29,7 +29,7 @@ while 1:
 	# read the gpio_lane value
 	value = int(os.popen(f"gpioget {gpio_lane}").read().strip())
 	print(value)
-        # outcomment this time.sleep to have fast triggering options
+	# outcomment this time.sleep to have fast triggering options
 	time.sleep(1)
-        if (value = 0): 
-            print ("trigger detected") 
+	if (value == 0): 
+		print ("trigger detected") 
