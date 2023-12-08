@@ -1,6 +1,8 @@
 ### General
-GPIO13 or within the Jetson pin 38 must be pulled high to put the UART communication from the 40 pin header (/dev/ttyTHS1) to the internal one
+GPIO13 or within the Jetson pin 38 must be pulled high to put the UART communication from the 40 pin header (/dev/ttyTHS0) to the internal one
 
+### Before Installation
+pip3 install gpio
 
 ### Features
 
