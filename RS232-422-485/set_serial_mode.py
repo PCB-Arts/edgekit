@@ -2,10 +2,6 @@
 
 import os
 import sys
-
-dirname = os.path.dirname(__file__)
-sys.path.append(os.path.join(dirname, '../GPIO'))  # Add path to GPIO lib
-
 from gpio import *
 
 # MODULE = "Nano"
