@@ -11,6 +11,7 @@ from gpio import *
 # MODULE = "Nano"
 # Use Module "NX" for Xavier NX, Orin NX and Orin Nano
 MODULE = "NX"
+MODULE = "ORIN-NX"
 UART_BUS = ""
 
 if MODULE == "Nano":
@@ -26,6 +27,13 @@ elif MODULE == "NX":
 	SERIAL_SLEW_LIMIT = "231"
 	SERIAL_MODE_1 = "229"
 	SERIAL_MODE_0 = "230"
+	UART_BUS = "ttyTHS0"
+elif MODULE == "ORIN-NX":
+	SERIAL_OUTPUT_SELCTOR = "332" #PCC.04
+	SERIAL_120_TERMINATION = "296"
+	SERIAL_SLEW_LIMIT = "299"
+	SERIAL_MODE_1 = "297"
+	SERIAL_MODE_0 = "298"
 	UART_BUS = "ttyTHS0"
 else:
 	raise NotImplementedError("Unknown Module: %s", MODULE)
