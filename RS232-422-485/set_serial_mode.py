@@ -10,7 +10,7 @@ from gpio import *
 
 # MODULE = "Nano"
 # Use Module "NX" for Xavier NX, Orin NX and Orin Nano
-MODULE = "NX"
+# MODULE = "NX"
 MODULE = "ORIN-NX"
 UART_BUS = ""
 
