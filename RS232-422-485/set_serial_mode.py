@@ -3,14 +3,14 @@
 import os
 import sys
 
-import os
 dirname = os.path.dirname(__file__)
 sys.path.append(os.path.join(dirname, '../GPIO'))  # Add path to GPIO lib
 
 from gpio import *
 
-MODULE = "Nano"
-# MODULE = "NX"
+# MODULE = "Nano"
+# Use Module "NX" for Xavier NX, Orin NX and Orin Nano
+MODULE = "NX"
 UART_BUS = ""
 
 if MODULE == "Nano":
@@ -91,11 +91,11 @@ if __name__ == "__main__":
 
 	set_low(SERIAL_120_TERMINATION)
 	set_low(SERIAL_SLEW_LIMIT)
-	print("Configured serial interface /dev/ttyTHS1")
+	print("Configured serial interface /dev/ttyTHS0")
 
 	# to send some test-data, uncomment following code-block:
 	"""
-	with open("/dev/ttyTHS1", "w") as f:
+	with open("/dev/ttyTHS0", "w") as f:
 		f.write("test")
 	"""
 
