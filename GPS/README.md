@@ -15,6 +15,8 @@ this ensures that the MUX from the E-Key points to the GPS module.
 
 When communicating via /dev/ttyTHS2, error messages are sent from the GPS receiver, since Linux automatically sends responses back on this interface. These responses can be switched off with the command `stty -F /dev/ttyTHS2 -echo`.
 
+*Attention: For Orin based SOM Modules the port is /dev/ttyTHS1* 
+
 ### References
 
 Documentation for the GPS format: 
